@@ -5,6 +5,7 @@
 int main ()
 {
     List* lst = calloc (1, sizeof(List));
+    
     ListCtor (lst);
     ListInsert(lst, lst->head, 1);
     
