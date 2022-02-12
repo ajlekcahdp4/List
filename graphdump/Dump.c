@@ -5,6 +5,10 @@ void DtStart (FILE* dotfile)
     fprintf (dotfile, "rankdir = LR\n");
 }
 
+void DtSetTitle(FILE* dotfile, List* lst)
+{
+    fprintf (dotfile, "Data [shape=record, label =\"free = %d\\ncapacity = %d\\nsize = %d\\nhead = %d\\n tail = %d\\n\"]\n", lst->free, lst->capacity, lst->size, lst->head, lst->tail);
+}
 
 void DtSetNode (FILE* dotfile, List* lst, int i)
 {

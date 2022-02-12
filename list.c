@@ -62,6 +62,7 @@ int ListDump (List* lst)
     FILE* dotfile = fopen ("temp/dump.dot", "w");
     DtStart (dotfile);
     int i = 0;
+    DtSetTitle (dotfile, lst);
     for (i = 1; i <= lst->size; i++)
     {
         DtSetNode (dotfile, lst, i);
