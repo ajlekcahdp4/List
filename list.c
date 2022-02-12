@@ -69,10 +69,12 @@ int ListDump (List* lst)
     DtSetDependence (dotfile, i - 1);
     DtEnd (dotfile);
     fclose(dotfile);
+    system("dot temp/dump.dot -T png -o dump.png");
 }
 
 int ListDtor (List* lst)
 {
+    system ("rm -rf temp/");
     free (lst->data);
     free (lst->next);
     free (lst->prev);
