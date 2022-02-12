@@ -9,4 +9,4 @@ list:
 Dump:
 	$(CC) $(CFALGS) -c graphdump/Dump.c
 clean:
-	rm -rf *.o *.out
+	rm -rf *.o *.out *.png temp/ 

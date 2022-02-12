@@ -7,7 +7,7 @@
 
 int ListCtor (List* lst, char* log_file_name)
 {
-    lst->logfile = fopen (log_file_name, "w");
+    system ("mkdir temp");
     lst->capacity = 8;
     lst->data = calloc (lst->capacity, sizeof (list_t));
     lst->next = calloc (lst->capacity, sizeof (int));
@@ -61,13 +61,18 @@ int ListDump (List* lst)
 {
     FILE* dotfile = fopen ("temp/dump.dot", "w");
     DtStart (dotfile);
+    int i = 0;
+    for (i = 1; i <= lst->size; i++)
+    {
+        DtSetNode (dotfile, lst, i);
+    }
+    DtSetDependence (dotfile, i - 1);
     DtEnd (dotfile);
     fclose(dotfile);
 }
 
 int ListDtor (List* lst)
 {
-    fclose (lst->logfile);
     free (lst->data);
     free (lst->next);
     free (lst->prev);
