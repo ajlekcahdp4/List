@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "list.h"
+#include "graphdump/Dump.h"
 
 
 int ListCtor (List* lst, char* log_file_name)
@@ -58,15 +59,10 @@ int ListDelete (List* lst, int to_del)
 
 int ListDump (List* lst)
 {
-    fprintf (lst->logfile, "Dump of list (%p):\n", lst);
-    fprintf (lst->logfile, "free = %d\n", lst->free);
-    fprintf (lst->logfile, "    data next prev\n");
-    int i = 0;
-    for (i = 0; i < lst->capacity; i++)
-    {
-        fprintf(lst->logfile, "%d   [%d] [%d] [%d]\n", i, lst->data[i], lst->next[i], lst->prev[i]);
-    }
-
+    FILE* dotfile = fopen ("temp/dump.dot", "w");
+    DtStart (dotfile);
+    DtEnd (dotfile);
+    fclose(dotfile);
 }
 
 int ListDtor (List* lst)

@@ -1,4 +1,5 @@
 .vscode/
+temp/
 *.o
 *.out
 *.txt
