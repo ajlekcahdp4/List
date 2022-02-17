@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS= -Wall -Werror
 all: main list Dump
-	$(CC) $(CFLAGS) main.o list.o Dump.o -o list.out
+	$(CC) $(CFLAGS) -g main.o list.o Dump.o -o list.out
 main:
 	$(CC) $(CFLAGS) -c main.c
 list:

@@ -42,7 +42,8 @@ int ListInsert (List* lst, int last, list_t val)
         lst->next[last] = free;
         lst->prev[free] = last;
     }
-    lst->tail += 1;
+    if (last == lst->tail)
+        lst->tail += 1;
     lst->size += 1;
     
     return 0;
@@ -63,11 +64,13 @@ int ListDump (List* lst)
     DtStart (dotfile);
     int i = 0;
     DtSetTitle (dotfile, lst);
-    for (i = 1; i <= lst->size; i++)
+    for (i = 1; i <= lst->size && i != 0;)
     {
-        DtSetNode (dotfile, lst, i);
+        DtSetNode (dotfile, lst, &i);
     }
-    DtSetDependence (dotfile, i - 1);
+    fprintf (dotfile, "\n\n\n");
+
+    DtSetDependence (dotfile, lst, lst->size);
     DtEnd (dotfile);
     fclose(dotfile);
     system("dot temp/dump.dot -T png -o dump.png");
