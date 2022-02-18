@@ -14,6 +14,7 @@ int main ()
     ListInsert (lst, lst->tail, 5);
     ListInsert (lst, lst->tail, 6);
     ListInsert (lst, 2, 7);
+    ListDelete (lst, 3);
     ListDump (lst);
     ListDtor(lst);
     return 0;
