@@ -49,7 +49,7 @@ int ListInsert (List* lst, int last, list_t val)
     return 0;
 }
 
-int ListDelete (List* lst, int to_del) //rewrite to logical numbers, not physical
+int ListDelete (List* lst, int to_del)
 {
     int prev = lst->prev[to_del];
     lst->next[prev] = lst->next[to_del];
@@ -78,7 +78,7 @@ int ListDump (List* lst)
 
 int ListDtor (List* lst)
 {
-    //system ("rm -rf temp/");
+    system ("rm -rf temp/");
     free (lst->data);
     free (lst->next);
     free (lst->prev);

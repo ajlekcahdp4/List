@@ -4,3 +4,4 @@ temp/
 *.out
 *.txt
 *.png
+main.c
