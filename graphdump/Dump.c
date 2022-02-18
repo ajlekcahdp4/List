@@ -15,18 +15,15 @@ void DtSetTitle(FILE* dotfile, List* lst)
     fprintf (dotfile, "size [shape=record, style=rounded, label = \"size = %d\"];\n\n\n", lst->size);
 }
 
-void DtSetNode (FILE* dotfile, List* lst, int* i)
+void DtSetNode (FILE* dotfile, List* lst, int i)
 {
-    if (*i <= lst->size)
-    {
-        fprintf (dotfile, "Node%d [shape=record, style=filled, fillcolor = \"palegreen\", label=\"<f0%d>%d|data\\n%d|<f1%d>next\\n%d|prev\\n%d\"]\n", *i, *i, *i, lst->data[*i], *i, lst->next[*i], lst->prev[*i]);
-        *i = lst->next[*i];
-    }
+    fprintf (dotfile, "Node%d [shape=record, style=filled, fillcolor = \"palegreen\", label=\"<f0%d>%d|data\\n%d|<f1%d>next\\n%d|prev\\n%d\"]\n", i, i, i, lst->data[i], i, lst->next[i], lst->prev[i]);
 }
 
-void DtSetDependence (FILE* dotfile, List* lst, int size)
+void DtSetDependence (FILE* dotfile, List* lst)
 {
-    for (int i = 1; i != 0 && i != lst->tail;)
+    int i = 1;
+    while (i != 0 && i != lst->tail)
     {
         fprintf (dotfile, "Node%d: <f1%d> -> Node%d:<f0%d>[color=\"red\"];\n", i, i, lst->next[i], lst->next[i]);
         i = lst->next[i];

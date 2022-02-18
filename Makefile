@@ -1,12 +1,12 @@
 CC=gcc
-CFLAGS= -Wall -Werror
+CFLAGS= -Wall -Werror -Wextra
 all: main list Dump
-	$(CC) $(CFLAGS) -g main.o list.o Dump.o -o list.out
+	$(CC) $(CFLAGS) main.o list.o Dump.o -o list.out
 main:
 	$(CC) $(CFLAGS) -c main.c
 list:
-	$(CC) $(CFALGS) -c list.c
+	$(CC) $(CFLAGS) -c list.c
 Dump:
-	$(CC) $(CFALGS) -c graphdump/Dump.c
+	$(CC) $(CFLAGS) -c graphdump/Dump.c
 clean:
 	rm -rf *.o *.out *.png temp/ 
