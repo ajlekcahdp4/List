@@ -26,7 +26,7 @@ int ListCtor (List* lst)
 }
 
 
-int ListInsert (List* lst, int last, list_t val)
+int ListInsert (List* lst, int last, list_t val) //safe free delete
 {
     int free = lst->free;
     lst->data[free] = val;
@@ -36,6 +36,7 @@ int ListInsert (List* lst, int last, list_t val)
         lst->next[free] = 0;
         lst->prev[free] = 0;
         lst->head = free;
+        lst->tail = free;
     }
     else
     {
@@ -52,7 +53,7 @@ int ListInsert (List* lst, int last, list_t val)
     return 0;
 }
 
-int ListDelete (List* lst, int to_del) //rewrite
+int ListDelete (List* lst, int to_del)
 {
     int prev = lst->prev[to_del];
     if (to_del == lst->head)
