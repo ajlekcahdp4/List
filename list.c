@@ -29,8 +29,12 @@ int ListCtor (List* lst)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ListInsert (List* lst, int last, list_t val) //safe free delete
 =======
+=======
+
+>>>>>>> circle
 int ListInsertAft (List* lst, int last, list_t val)
 >>>>>>> circle
 {
