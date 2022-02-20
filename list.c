@@ -28,15 +28,7 @@ int ListCtor (List* lst)
 }
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-int ListInsert (List* lst, int last, list_t val) //safe free delete
-=======
-=======
-
->>>>>>> circle
 int ListInsertAft (List* lst, int last, list_t val)
->>>>>>> circle
 {
     if (lst == 0)
         return -1;
@@ -46,23 +38,6 @@ int ListInsertAft (List* lst, int last, list_t val)
     int free = lst->free;
     lst->data[free] = val;
     lst->free = fabs(lst->next[lst->free]);
-<<<<<<< HEAD
-    if (lst->size == 0)
-    {
-        lst->next[free] = 0;
-        lst->prev[free] = 0;
-        lst->head = free;
-        lst->tail = free;
-    }
-    else
-    {
-        lst->next[free] = lst->next[last];
-        lst->next[last] = free;
-        lst->prev[free] = last;
-    }
-
-=======
->>>>>>> circle
 
     //=============================insertion===============================
     lst->next[free] = lst->next[last];
@@ -86,6 +61,7 @@ int ListDelete (List* lst, int to_del)
     lst->next[to_del] = -lst->free;
     lst->free = to_del;
     return 0;
+    
 }    
 
 void ListResize (List* lst, int new_capacity)
