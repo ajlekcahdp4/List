@@ -10,8 +10,8 @@ void DtSetTitle(FILE* dotfile, List* lst)
     fprintf(dotfile ,"TITLE [shape=record, color=\"red\", label = \"DUMP of the list\"];\n\n");
     fprintf (dotfile, "free [shape=record, style=rounded, label =\"free = %d\"];\n", lst->free);
     fprintf (dotfile, "capacity [shape=record, style=rounded, label =\"capacity = %d\"];\n", lst->capacity);
-    fprintf (dotfile, "head [shape=record, style=rounded, label =\"head = %d\"];\n", lst->head);
-    fprintf (dotfile, "tail [shape=record, style=rounded, label =\"tail = %d\"];\n", lst->tail);
+    fprintf (dotfile, "head [shape=record, style=rounded, label =\"head = %d\"];\n", lst->next[lst->fic]);
+    fprintf (dotfile, "tail [shape=record, style=rounded, label =\"tail = %d\"];\n", lst->prev[lst->fic]);
     fprintf (dotfile, "size [shape=record, style=rounded, label = \"size = %d\"];\n\n\n", lst->size);
 }
 
@@ -23,13 +23,14 @@ void DtSetNode (FILE* dotfile, List* lst, int i)
 void DtSetDependence (FILE* dotfile, List* lst)
 {
     int i = 1;
-    while (i != 0 && i != lst->tail)
+    while (lst->next[i] != lst->fic  && i != lst->prev[lst->fic])
     {
         fprintf (dotfile, "Node%d: <f1%d> -> Node%d:<f0%d>[color=\"red\"];\n", i, i, lst->next[i], lst->next[i]);
         i = lst->next[i];
     }
-    fprintf(dotfile, "Node%d -> Node1[color=\"white\"];\n", lst->tail);
-    fprintf(dotfile, "free -> capacity -> size -> head -> tail[color=\"white\"];\n");
+    if (lst->size > 1)
+        fprintf(dotfile, "Node%d -> Node1[color=\"invis\"];\n", lst->prev[lst->fic]);
+    fprintf(dotfile, "free -> capacity -> size -> head -> tail[color=\"invis\"];\n");
 }
 
 void DtEnd (FILE* dotfile)
