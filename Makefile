@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS= -Wall -Werror -Wextra
+CFLAGS= -Wall -Werror -Wextra -g
 all: main list Dump
 	$(CC) $(CFLAGS) main.o list.o Dump.o -o list.out
 main:
