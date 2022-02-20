@@ -6,6 +6,7 @@ int main ()
 {
     List* lst = calloc (1, sizeof(List));
 
+
     ListCtor (lst);
 
     int last_elem = ListInsertAft(lst, lst->fic, 1);
