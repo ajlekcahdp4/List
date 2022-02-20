@@ -12,6 +12,7 @@ int ListCtor (List* lst)
     lst->data = calloc (lst->capacity, sizeof (list_t));
     lst->next = calloc (lst->capacity, sizeof (int));
     lst->prev = calloc (lst->capacity, sizeof (int));
+    lst->size = 0;
     lst->free = 1;
     lst->fic = 0;
     lst->next[lst->fic] = lst->fic;
@@ -31,6 +32,9 @@ int ListInsertAft (List* lst, int last, list_t val)
 {
     if (lst == 0)
         return -1;
+
+    if (lst->size == lst->capacity - 1)
+        ListResize (lst, lst->capacity * 2);
     int free = lst->free;
     lst->data[free] = val;
     lst->free = fabs(lst->next[lst->free]);
@@ -71,6 +75,8 @@ void ListResize (List* lst, int new_capacity)
         lst->free = i;
 
         lst->prev[i] = -1;
+
+        lst->data[i] = 0;
     }
     //===================end===========================================
 
@@ -99,7 +105,7 @@ int ListDump (List* lst)
 
 int ListDtor (List* lst)
 {
-    //system ("rm -rf temp/");
+    system ("rm -rf temp/");
     free (lst->data);
     free (lst->next);
     free (lst->prev);

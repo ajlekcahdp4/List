@@ -10,17 +10,9 @@ int main ()
 
     int last_elem = ListInsertAft(lst, lst->fic, 1);
     
+    for (int i = 2; i < 20; i++)
+        last_elem = ListInsertAft(lst, last_elem, i);
     
-    last_elem = ListInsertAft(lst, last_elem, 2);
-    /*ListInsertAft (lst, lst->tail, 3);
-    ListInsertAft (lst, lst->tail, 4);
-    ListInsertAft (lst, lst->tail, 5);
-    ListInsertAft (lst, lst->tail, 6);
-    ListResize (lst, 16);
-    ListInsertAft (lst, lst->tail, 66);
-    ListDelete (lst, 3);
-    ListInsertAft (lst, 2, 7);
-    */
     ListDump (lst);
     ListDtor(lst);
     return 0;
