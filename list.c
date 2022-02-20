@@ -65,6 +65,7 @@ int ListDelete (List* lst, int to_del) //rewrite
 
 void ListResize (List* lst, int new_capacity)
 {
+    
     lst->data = realloc (lst->data, new_capacity*sizeof(list_t));
     lst->next = realloc (lst->next, new_capacity*sizeof(int));
     lst->prev = realloc (lst->prev, new_capacity*sizeof(int));
