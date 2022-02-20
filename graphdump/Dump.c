@@ -32,6 +32,7 @@ void DtSetDependence (FILE* dotfile, List* lst)
     
     i = lst->next[lst->fic];
     while (i != lst->prev[lst->fic])
+<<<<<<< HEAD
     {
         fprintf (dotfile, "Node%d -> ", i);
         i = lst->next[i];
@@ -40,16 +41,23 @@ void DtSetDependence (FILE* dotfile, List* lst)
     
     i = 1;
     while (i != 0 && i != lst->tail)
+=======
+>>>>>>> 5cdfc0f... success
     {
         fprintf (dotfile, "Node%d: <f1%d> -> Node%d:<f0%d>[color=\"red\"];\n", i, i, lst->next[i], lst->next[i]);
         i = lst->next[i];
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     fprintf(dotfile, "Node%d -> Node1[color=\"white\"];\n", lst->tail);
 =======
 
     fprintf(dotfile, "Node%d -> Node%d[color=\"invis\"];\n", lst->prev[lst->fic], lst->next[lst->fic]);
 >>>>>>> circle
+=======
+
+    fprintf(dotfile, "Node%d -> Node%d[color=\"invis\"];\n", lst->prev[lst->fic], lst->next[lst->fic]);
+>>>>>>> 5cdfc0f... success
     fprintf(dotfile, "free -> capacity -> size -> head -> tail[color=\"invis\"];\n");
 }
 
