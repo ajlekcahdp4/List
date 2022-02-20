@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
 #include <math.h>
 #include "list.h"
 #include "graphdump/Dump.h"
@@ -122,7 +121,7 @@ int ListDump (List* lst)
 {
     system ("mkdir temp");
     FILE* dotfile = fopen ("temp/dump.dot", "w");
-    assert (dotfile);
+
     DtStart (dotfile);
     DtSetTitle (dotfile, lst);
     int cur = lst->next[lst->fic];
