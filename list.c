@@ -12,9 +12,11 @@ int ListCtor (List* lst)
     lst->data = calloc (lst->capacity, sizeof (list_t));
     lst->next = calloc (lst->capacity, sizeof (int));
     lst->prev = calloc (lst->capacity, sizeof (int));
+    lst->size = 0;
     lst->free = 1;
-    lst->head = 0;
-    lst->tail = 0;
+    lst->fic = 0;
+    lst->next[lst->fic] = lst->fic;
+    lst->prev[lst->fic] = lst->fic;
 
     for (int i = 1; i < lst->capacity - 1; i++)
     {
@@ -26,11 +28,21 @@ int ListCtor (List* lst)
 }
 
 
+<<<<<<< HEAD
 int ListInsert (List* lst, int last, list_t val) //safe free delete
+=======
+int ListInsertAft (List* lst, int last, list_t val)
+>>>>>>> circle
 {
+    if (lst == 0)
+        return -1;
+
+    if (lst->size == lst->capacity - 1)
+        ListResize (lst, lst->capacity * 2);
     int free = lst->free;
     lst->data[free] = val;
     lst->free = fabs(lst->next[lst->free]);
+<<<<<<< HEAD
     if (lst->size == 0)
     {
         lst->next[free] = 0;
@@ -45,19 +57,24 @@ int ListInsert (List* lst, int last, list_t val) //safe free delete
         lst->prev[free] = last;
     }
 
+=======
+>>>>>>> circle
 
-    if (last == lst->tail)
-        lst->tail = free;
+    //=============================insertion===============================
+    lst->next[free] = lst->next[last];
+    lst->next[last] = free;
+    lst->prev[free] = last;
+    lst->prev[lst->next[free]] = free;
+    //=========================end=of=insertion============================
     lst->size += 1;
 
-    return 0;
+    return free;
 }
 
 int ListDelete (List* lst, int to_del)
 {
     int prev = lst->prev[to_del];
-    if (to_del == lst->head)
-        lst->head = lst->next[lst->head];
+    
     lst->size -= 1;
 
     lst->next[prev] = lst->next[to_del];
@@ -73,12 +90,14 @@ void ListResize (List* lst, int new_capacity)
     lst->next = realloc (lst->next, new_capacity*sizeof(int));
     lst->prev = realloc (lst->prev, new_capacity*sizeof(int));
     //===================insertes=to=the=free=list====================
-    for (int i = lst->tail + 1; i < new_capacity; i++)
+    for (int i = lst->capacity; i < new_capacity; i++)
     {
         lst->next[i] = -lst->free;
         lst->free = i;
 
         lst->prev[i] = -1;
+
+        lst->data[i] = 0;
     }
     //===================end===========================================
 
@@ -90,8 +109,8 @@ int ListDump (List* lst)
     FILE* dotfile = fopen ("temp/dump.dot", "w");
     DtStart (dotfile);
     DtSetTitle (dotfile, lst);
-    int cur = lst->head;
-    while (cur != 0)
+    int cur = lst->next[lst->fic];
+    while (cur != lst->fic)
     {
         DtSetNode (dotfile, lst, cur);
         cur = lst->next[cur];

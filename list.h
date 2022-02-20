@@ -6,15 +6,14 @@ typedef struct List {
     list_t* data;
     int* next;
     int* prev;
-    int head;
-    int tail;
+    int fic;
     int free;
     int capacity;
     int size;
 } List;
 
 int ListCtor (List* lst);
-int ListInsert (List* lst, int last, list_t val);
+int ListInsertAft (List* lst, int last, list_t val);
 int ListDelete (List* lst, int to_del);
 int ListDump (List* lst);
 int ListDtor (List* lst);
