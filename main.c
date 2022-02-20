@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "list.h"
 
+
 int main ()
 {
     List* lst = calloc (1, sizeof(List));
