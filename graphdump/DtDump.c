@@ -8,11 +8,12 @@ void DtStart (FILE* dotfile)
 void DtSetTitle(FILE* dotfile, List* lst)
 {
     fprintf(dotfile ,"TITLE [shape=record, color=\"red\", label = \"DUMP of the list\"];\n\n");
-    fprintf (dotfile, "free [shape=record, style=rounded, label =\"free = %d\"];\n", lst->free);
-    fprintf (dotfile, "capacity [shape=record, style=rounded, label =\"capacity = %d\"];\n", lst->capacity);
-    fprintf (dotfile, "head [shape=record, style=rounded, label =\"head = %d\"];\n", lst->next[lst->fic]);
-    fprintf (dotfile, "tail [shape=record, style=rounded, label =\"tail = %d\"];\n", lst->prev[lst->fic]);
-    fprintf (dotfile, "size [shape=record, style=rounded, label = \"size = %d\"];\n\n\n", lst->size);
+    fprintf (dotfile, "free [shape=record, style=rounded, label =\"free | %d\"];\n", lst->free);
+    fprintf (dotfile, "capacity [shape=record, style=rounded, label =\"capacity | %d\"];\n", lst->capacity);
+    fprintf (dotfile, "head [shape=record, style=rounded, label =\"head | %d\"];\n", lst->next[lst->fic]);
+    fprintf (dotfile, "tail [shape=record, style=rounded, label =\"tail | %d\"];\n", lst->prev[lst->fic]);
+    fprintf (dotfile, "size [shape=record, style=rounded, label = \"size | %d\"];\n", lst->size);
+    fprintf (dotfile, "linearized [shape=record, style=rounded, label = \"linearized|%d\"];\n\n\n", lst->linearized);
 }
 
 void DtSetNode (FILE* dotfile, List* lst, int i)
@@ -38,7 +39,7 @@ void DtSetDependence (FILE* dotfile, List* lst)
     }
 
     fprintf(dotfile, "Node%d -> Node%d[color=\"invis\"];\n", lst->prev[lst->fic], lst->next[lst->fic]);
-    fprintf(dotfile, "free -> capacity -> size -> head -> tail[color=\"invis\"];\n");
+    fprintf(dotfile, "free -> capacity -> size -> head -> tail -> linearized [color=\"invis\"];\n");
 }
 
 void DtEnd (FILE* dotfile)

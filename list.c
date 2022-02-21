@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include <math.h>
 #include <string.h>
 #include "list.h"
@@ -7,7 +8,7 @@
 #include "graphdump/DtDump.h"
 
 
-List* ListCtor (int capacity)
+List* ListCtor (int capacity, char* logfile_name)
 {
     List* lst = 0;
     lst = calloc (1, sizeof (List));
@@ -32,7 +33,7 @@ List* ListCtor (int capacity)
     }
 
     lst->prev[lst->capacity - 1] = -1;
-    lst->logfile = HtmlStart ("logs/logfile.html");
+    lst->logfile = HtmlStart (logfile_name);
     return lst;
 }
 
@@ -42,14 +43,12 @@ int ListInsertAft (List* lst, int last, list_t val)
     ListCheck (lst);
     if (lst == 0)
         return -1;
-
-    if (lst->next[last] != lst->prev[lst->fic])
-        lst->linearized = 0;
-    
     if (lst->size == lst->capacity - 1)
         ListResize (lst, lst->capacity * 2);
     
     int free = lst->free;
+    if (free != lst->prev[lst->fic] + 1)
+        lst->linearized = 0;
     lst->data[free] = val;
     lst->free = fabs(lst->next[lst->free]);
 
@@ -60,6 +59,7 @@ int ListInsertAft (List* lst, int last, list_t val)
     lst->prev[lst->next[free]] = free;
     //=========================end=of=insertion============================
     lst->size += 1;
+    
 
     return free;
 }
@@ -85,7 +85,7 @@ int ListDelete (List* lst, int to_del)
 void ListCheck (List* lst)
 {
     if (lst == 0)
-        PrintError (lst->logfile, ERR_LIST_ZERO_POINTER);
+        assert(!"ERROR: LIST POINTER IS ZERO");
 }
 
 void ListResize (List* lst, int new_capacity)
@@ -112,7 +112,7 @@ List* Linearization  (List* lst)
 {
     ListCheck (lst);
 
-    List* new_lst  = ListCtor (lst->capacity);
+    List* new_lst  = ListCtor (lst->capacity, "logs/new_log_for_linearization.html");
     int phys_n = 0;
     int last_pos = new_lst->fic;
     for (int i= 1; i <= lst->size; i++)
@@ -120,8 +120,16 @@ List* Linearization  (List* lst)
         phys_n = VerySlowDoNotCallMeLogicalToPhysical (lst, i);
         last_pos = ListInsertAft (new_lst, last_pos, lst->data[phys_n]);
     }
-    ListDtor (lst);
-    return new_lst;
+
+    memcpy (lst->data, new_lst->data, new_lst->capacity * sizeof(list_t));
+    memcpy (lst->next, new_lst->next, new_lst->capacity * sizeof(list_t));
+    memcpy (lst->prev, new_lst->prev, new_lst->capacity * sizeof(list_t));
+    lst->free = new_lst->free;
+    lst->linearized = 1;
+
+    ListDtor (new_lst);
+    system ("rm logs/new_log_for_linearization.html");
+    return lst;
 }
 
 int  VerySlowDoNotCallMeLogicalToPhysical (List* lst, int log_num)
@@ -166,6 +174,7 @@ int ListGraphDump (List* lst, char* name)
     ImportPicture (lst->logfile, name);
 
     system ("rm -rf temp/");
+    free (pic_name);
     return 0;
 }
 

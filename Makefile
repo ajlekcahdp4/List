@@ -11,4 +11,4 @@ HTMLdump:
 DtDump :
 	$(CC) $(CFLAGS) -c graphdump/DtDump.c
 clean:
-	rm -rf *.o *.out *.png  *.html temp/ 
+	rm -rf *.o *.out *.png  *.html temp/ logs/* 

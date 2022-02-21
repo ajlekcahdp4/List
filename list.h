@@ -14,7 +14,7 @@ typedef struct List {
     int  linearized;
 } List;
 
-List*  ListCtor     (int capacity);
+List*  ListCtor     (int capacity, char* logfile_name);
 int  ListInsertAft  (List* lst, int last, list_t val);
 int  ListDelete     (List* lst, int to_del);
 int  ListGraphDump       (List* lst, char* pic_name);

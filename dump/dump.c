@@ -13,6 +13,7 @@ FILE* HtmlStart (char* logname)
 
 void ImportPicture (FILE* logfile, char* PicName)
 {
+    fprintf (logfile, "     <b>%s</b>:\n", PicName);
     fprintf (logfile, "<img src = \"%s\" width = \"1450px\">\n\n", PicName);
 }
 void PrintError (FILE* logfile, int Err)
