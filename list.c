@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "list.h"
-#include "graphdump/Dump.h"
+#include "graphdump/DtDump.h"
 
 
 List* ListCtor (int capacity)

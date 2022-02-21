@@ -1,4 +1,4 @@
-#include "Dump.h"
+#include "DtDump.h"
 void DtStart (FILE* dotfile)
 {
     fprintf (dotfile, "digraph G {\n");
