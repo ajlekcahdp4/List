@@ -16,7 +16,7 @@ int main ()
         last_elem = ListInsertAft(lst, last_elem, i);
     lst = Linearization (lst);
     
-    ListDump (lst);
+    ListGraphDump (lst, "dump.svg");
     ListDtor(lst);
     return 0;
 }

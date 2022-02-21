@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 #include "list.h"
+#include "dump/dump.h"
 #include "graphdump/DtDump.h"
 
 
@@ -9,29 +11,35 @@ List* ListCtor (int capacity)
 {
     List* lst = 0;
     lst = calloc (1, sizeof (List));
+
     lst->capacity   = capacity;
     lst->size       = 0;
     lst->free       = 1;
     lst->fic        = 0;
     lst->linearized = 1;
+
     lst->data = calloc (lst->capacity, sizeof (list_t));
     lst->next = calloc (lst->capacity, sizeof (int));
     lst->prev = calloc (lst->capacity, sizeof (int));
+    
     lst->next[lst->fic] = lst->fic;
     lst->prev[lst->fic] = lst->fic;
-
+    
     for (int i = 1; i < lst->capacity - 1; i++)
     {
         lst->next[i] = -i - 1;
         lst->prev[i] = -1;
     }
+
     lst->prev[lst->capacity - 1] = -1;
+    lst->logfile = HtmlStart ("logs/logfile.html");
     return lst;
 }
 
 
 int ListInsertAft (List* lst, int last, list_t val)
 {
+    ListCheck (lst);
     if (lst == 0)
         return -1;
 
@@ -58,21 +66,31 @@ int ListInsertAft (List* lst, int last, list_t val)
 
 int ListDelete (List* lst, int to_del)
 {
-    int prev = lst->prev[to_del];
-    
-    lst->size -= 1;
+    ListCheck (lst);
+    if (lst->size == 0)
+        PrintError (lst->logfile, ERR_LIST_UNDERFLOW);
 
+
+    int prev = lst->prev[to_del];
+    lst->size -= 1;
     lst->next[prev] = lst->next[to_del];
     lst->prev[lst->next[to_del]] = prev;
     lst->next[to_del] = -lst->free;
     lst->free = to_del;
+    HtmlEnd (lst->logfile);
     return 0;
     
 }    
 
+void ListCheck (List* lst)
+{
+    if (lst == 0)
+        PrintError (lst->logfile, ERR_LIST_ZERO_POINTER);
+}
+
 void ListResize (List* lst, int new_capacity)
 {
-    
+    ListCheck (lst);
     lst->data = realloc (lst->data, new_capacity*sizeof(list_t));
     lst->next = realloc (lst->next, new_capacity*sizeof(int));
     lst->prev = realloc (lst->prev, new_capacity*sizeof(int));
@@ -86,15 +104,15 @@ void ListResize (List* lst, int new_capacity)
 
         lst->data[i] = 0;
     }
-    //===================end===========================================
-
+    //=============================end=================================
     lst->capacity = new_capacity;
 }
 
 List* Linearization  (List* lst)
 {
-    List* new_lst  = ListCtor (lst->capacity);
+    ListCheck (lst);
 
+    List* new_lst  = ListCtor (lst->capacity);
     int phys_n = 0;
     int last_pos = new_lst->fic;
     for (int i= 1; i <= lst->size; i++)
@@ -108,6 +126,7 @@ List* Linearization  (List* lst)
 
 int  VerySlowDoNotCallMeLogicalToPhysical (List* lst, int log_num)
 {
+    ListCheck (lst);
     int cur = lst->fic;
 
     for (int i = 0; i < log_num; i++)
@@ -117,10 +136,16 @@ int  VerySlowDoNotCallMeLogicalToPhysical (List* lst, int log_num)
 
 
 
-int ListDump (List* lst)
+int ListGraphDump (List* lst, char* name)
 {
+    ListCheck (lst);
     system ("mkdir temp");
     FILE* dotfile = fopen ("temp/dump.dot", "w");
+
+    char* pic_name = calloc (100, sizeof(char));
+    memcpy (pic_name, "dot temp/dump.dot -T svg -o logs/", 35*sizeof(char));
+    strcat (pic_name, name);
+
 
     DtStart (dotfile);
     DtSetTitle (dotfile, lst);
@@ -135,13 +160,19 @@ int ListDump (List* lst)
     DtSetDependence (dotfile, lst);
     DtEnd (dotfile);
     fclose(dotfile);
-    system("dot temp/dump.dot -T png -o dump.png");
+
+
+    system(pic_name);
+    ImportPicture (lst->logfile, name);
+
     system ("rm -rf temp/");
     return 0;
 }
 
 int ListDtor (List* lst)
 {
+    ListCheck (lst);
+    HtmlEnd (lst->logfile);
     free (lst->data);
     free (lst->next);
     free (lst->prev);
