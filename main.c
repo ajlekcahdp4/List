@@ -12,7 +12,7 @@ int main ()
 
     int last_elem = ListInsertAft(lst, lst->fic, 1);
     
-    for (int i = 2; i < 20; i++)
+    for (int i = 2; i < 10; i++)
         last_elem = ListInsertAft(lst, last_elem, i);
     ListGraphDump (lst, "dump1.svg");
     lst = Linearization (lst);

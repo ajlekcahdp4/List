@@ -11,3 +11,8 @@ My list has an ordinary list of functions:
 
 ## Insertion principle:
 * The feature, that makes insertion much faster in our list is a variable "free", that always contains index of free element of the array. And this variable updates instantly, because we have the list of free elements of our array (In resizing of the list and deleting the nodes we must add elemnts in this lists of free).
+
+## Example of graphic dump of the list:
+<p align="center">
+<img src="https://github.com/ajlekcahdp4/List/blob/main/examples/example_of_graph_dump.png">
+</p>
