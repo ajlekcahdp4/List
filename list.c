@@ -7,6 +7,10 @@
 #include "dump/dump.h"
 #include "graphdump/DtDump.h"
 
+void ListCheck (List* lst);
+
+
+
 
 List* ListCtor (int capacity, char* logfile_name)
 {
@@ -64,7 +68,7 @@ int ListInsertAft (List* lst, int last, list_t val)
     return free;
 }
 
-int ListDelete (List* lst, int to_del)
+void ListDelete (List* lst, int to_del)
 {
     ListCheck (lst);
     if (lst->size == 0)
@@ -78,8 +82,6 @@ int ListDelete (List* lst, int to_del)
     lst->next[to_del] = -lst->free;
     lst->free = to_del;
     HtmlEnd (lst->logfile);
-    return 0;
-    
 }    
 
 void ListCheck (List* lst)
@@ -144,7 +146,7 @@ int  VerySlowDoNotCallMeLogicalToPhysical (List* lst, int log_num)
 
 
 
-int ListGraphDump (List* lst, char* name)
+void ListGraphDump (List* lst, char* name)
 {
     ListCheck (lst);
     system ("mkdir temp");
@@ -175,10 +177,9 @@ int ListGraphDump (List* lst, char* name)
 
     system ("rm -rf temp/");
     free (pic_name);
-    return 0;
 }
 
-int ListDtor (List* lst)
+void ListDtor (List* lst)
 {
     ListCheck (lst);
     HtmlEnd (lst->logfile);
@@ -186,5 +187,4 @@ int ListDtor (List* lst)
     free (lst->next);
     free (lst->prev);
     free (lst);
-    return 0;
 }

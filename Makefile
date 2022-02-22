@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS= -Wall -Werror -Wextra -g
+CFLAGS= -Wall -Werror -Wextra
 all: main list HTMLdump DtDump
 	$(CC) $(CFLAGS) main.o list.o dump.o DtDump.o -o list.out
 main:

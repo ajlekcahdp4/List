@@ -16,12 +16,10 @@ typedef struct List {
 
 List*  ListCtor     (int capacity, char* logfile_name);
 int  ListInsertAft  (List* lst, int last, list_t val);
-int  ListDelete     (List* lst, int to_del);
-int  ListGraphDump       (List* lst, char* pic_name);
-int  ListDtor       (List* lst);
-void ListHtmlDump (List* lst);
+void  ListDelete     (List* lst, int to_del);
+void  ListGraphDump       (List* lst, char* pic_name);
+void  ListDtor       (List* lst);
 void ListResize     (List* lst, int new_capacity);
-void ListCheck (List* lst);
 List* Linearization  (List* lst);
 
 int  VerySlowDoNotCallMeLogicalToPhysical (List* lst, int log_num);
