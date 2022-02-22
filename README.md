@@ -3,10 +3,15 @@ The Repository with my realization of list data structure
 
 Table of contents:
 [Usage](#Usage)
+
 [example of usage](#Example-of-usage)
+
 [functions](#functions)
+
 [Insertion priciple](#insertion-principle)
+
 [example of the dump](#example-of-graphic-dump-of-the-list)
+
 ## Features of this list:
 * This is not an ordinary list implemented on pointers (where every node is a structure with data and poiners to the next and the previous nodes).
 * There is a structure with 3 arrays (data, next and previous) in this list and all the nodes of the list contained in this arrays. This approach makes inserting a new element into the list much faster (O(1) against O(N)) than in its classical implementation. Because we don't need to allocated memory every time we want to insert the new element into the list(For more information about the insertion principle, see below).
