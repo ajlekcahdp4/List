@@ -149,34 +149,36 @@ int  VerySlowDoNotCallMeLogicalToPhysical (List* lst, int log_num)
 void ListGraphDump (List* lst, char* name)
 {
     ListCheck (lst);
-    system ("mkdir temp");
-    FILE* dotfile = fopen ("temp/dump.dot", "w");
-
-    char* pic_name = calloc (100, sizeof(char));
-    memcpy (pic_name, "dot temp/dump.dot -T svg -o logs/", 35*sizeof(char));
-    strcat (pic_name, name);
-
-
-    DtStart (dotfile);
-    DtSetTitle (dotfile, lst);
-    int cur = lst->next[lst->fic];
-    while (cur != lst->fic)
+    if (lst->size > 0)
     {
-        DtSetNode (dotfile, lst, cur);
-        cur = lst->next[cur];
-    }
-    fprintf (dotfile, "\n\n\n");
+        system ("mkdir temp");
+        FILE* dotfile = fopen ("temp/dump.dot", "w");
 
-    DtSetDependence (dotfile, lst);
-    DtEnd (dotfile);
-    fclose(dotfile);
+        char* pic_name = calloc (100, sizeof(char));
+        memcpy (pic_name, "dot temp/dump.dot -T svg -o logs/", 35*sizeof(char));
+        strcat (pic_name, name);
+
+        DtStart (dotfile);
+        DtSetTitle (dotfile, lst);
+        int cur = lst->next[lst->fic];
+        while (cur != lst->fic)
+        {
+            DtSetNode (dotfile, lst, cur);
+            cur = lst->next[cur];
+        }
+        fprintf (dotfile, "\n\n\n");
+
+        DtSetDependence (dotfile, lst);
+        DtEnd (dotfile);
+        fclose(dotfile);
 
 
-    system(pic_name);
-    ImportPicture (lst->logfile, name);
+        system(pic_name);
+        ImportPicture (lst->logfile, name);
 
-    system ("rm -rf temp/");
-    free (pic_name);
+        system ("rm -rf temp/");
+        free (pic_name);
+    }    
 }
 
 void ListDtor (List* lst)
