@@ -54,7 +54,7 @@ int ListInsertAft (List* lst, int last, list_t val)
     if (free != lst->prev[lst->fic] + 1)
         lst->linearized = 0;
     lst->data[free] = val;
-    lst->free = fabs(lst->next[lst->free]);
+    lst->free = abs(lst->next[lst->free]);
 
     //=============================insertion===============================
     lst->next[free] = lst->next[last];
