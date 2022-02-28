@@ -5,22 +5,22 @@ typedef int list_t;
 typedef struct List {
     list_t* data;
     FILE* logfile;
-    int* next;
-    int* prev;
-    int  fic;
-    int  free;
-    int  capacity;
-    int  size;
+    size_t  capacity;
+    size_t size;
+    long long int* next;
+    long long int* prev;
+    long long int  fic;
+    long long int  free;
     int  linearized;
 } List;
 
-List*  ListCtor     (int capacity, char* logfile_name);
-int  ListInsertAft  (List* lst, int last, list_t val);
-void  ListDelete     (List* lst, int to_del);
-void  ListGraphDump       (List* lst, char* pic_name);
+List*  ListCtor      (size_t capacity, char* logfile_name);
+long long  ListInsertAft   (List* lst, long long int last, list_t val);
+void  ListDelete     (List* lst, long long int to_del);
+void  ListGraphDump  (List* lst, char* pic_name);
 void  ListDtor       (List* lst);
-void ListResize     (List* lst, int new_capacity);
+void ListResize      (List* lst, size_t new_capacity);
 List* Linearization  (List* lst);
 
-int  VerySlowDoNotCallMeLogicalToPhysical (List* lst, int log_num);
+long long  VerySlowDoNotCallMeLogicalToPhysical (List* lst, size_t log_num);
 #endif

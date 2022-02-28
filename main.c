@@ -5,9 +5,9 @@
 int main ()
 {
     List* lst = 0;
-    lst = ListCtor (8, "logs/log.html"); // Create a list structure
+    lst = ListCtor (2, "logs/log.html"); // Create a list structure
 
-    int last_elem = ListInsertAft(lst, lst->fic, 1); // Insert first node and save it's index returns
+    long long last_elem = ListInsertAft(lst, lst->fic, 1); // Insert first node and save it's index returns
     
     for (int i = 2; i < 10; i++)
         last_elem = ListInsertAft(lst, last_elem, i); // Insert several nodes in a loop
