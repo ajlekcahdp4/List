@@ -1,5 +1,6 @@
 .vscode/
 temp/
+logs/
 *.o
 *.out
 *.txt
