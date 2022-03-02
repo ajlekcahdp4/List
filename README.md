@@ -5,6 +5,8 @@ Table of contents:
 
 [Usage](#Usage)
 
+[dependancies](#Dependencies)
+
 [example of usage](#Example-of-usage)
 
 [functions](#functions)
@@ -13,6 +15,8 @@ Table of contents:
 
 [example of the dump](#example-of-graphic-dump-of-the-list)
 
+
+
 ## Features of this list:
 * This is not an ordinary list implemented on pointers (where every node is a structure with data and poiners to the next and the previous nodes).
 * There is a structure with 3 arrays (data, next and previous) in this list and all the nodes of the list contained in this arrays. This approach makes inserting a new element into the list much faster (O(1) against O(N)) than in its classical implementation. Because we don't need to allocated memory every time we want to insert the new element into the list(For more information about the insertion principle, see below).
@@ -20,17 +24,26 @@ Table of contents:
 
 # Usage:
 ## To clone this repository run:
-```
-git clone https://github.com/ajlekcahdp4/List
+```bash
+$git clone https://github.com/ajlekcahdp4/List
 ```
 ## For using my list you need to compile:
-```
+```bash
 C_COMPILER_NAME your_prog.c List/list.c List/dump/dump.c List/graphdump/DtDump.c
 ```
 * You also can use my main.c file and then run:
-```
+```bash
 make
 ```
+
+# Dependencies
+* To use graphic dump you need [graphviz](https://graphviz.org/download/)
+* You can install graphviz by:
+```bash
+sudo apt install graphviz
+```
+
+
 ## Example of usage:
 ```c
 #include <stdio.h>
