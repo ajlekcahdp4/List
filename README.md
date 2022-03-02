@@ -24,8 +24,8 @@ Table of contents:
 
 # Usage:
 ## To clone this repository run:
-```console
-alex@~$ git clone https://github.com/ajlekcahdp4/List
+```
+git clone https://github.com/ajlekcahdp4/List
 ```
 ## For using my list you need to compile:
 ```bash
@@ -37,11 +37,16 @@ make
 ```
 
 # Dependencies
-* To use graphic dump you need [graphviz](https://graphviz.org/download/)
+## To use graphic dump you need [graphviz](https://graphviz.org/download/)
 * You can install graphviz by:
 ```bash
 sudo apt install graphviz
 ```
+## To use my list you need 'logs/' directory, then befor running my program run:
+```console
+mkdir logs
+```
+
 
 
 ## Example of usage:
