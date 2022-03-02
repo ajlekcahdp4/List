@@ -25,7 +25,7 @@ Table of contents:
 # Usage:
 ## To clone this repository run:
 ```bash
-$git clone https://github.com/ajlekcahdp4/List
+$ git clone https://github.com/ajlekcahdp4/List
 ```
 ## For using my list you need to compile:
 ```bash
